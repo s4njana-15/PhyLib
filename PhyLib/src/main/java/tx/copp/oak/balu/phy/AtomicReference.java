@@ -12,7 +12,13 @@ import java.util.Set;
 
 public class AtomicReference {
 	
+	public HashMap<String, Element> chemMap = new HashMap <String, Element>();
 	
+	
+	
+	public HashMap<String, Element> getChemMap() {
+		return chemMap;
+	}
 		
 	public void loadFile() {
 		
@@ -37,7 +43,7 @@ public class AtomicReference {
 				temp.setAtomicNumber(Integer.parseInt(elRay[2]));
 				temp.setAtomicMass(Double.parseDouble(elRay[3]));
 				
-				// chemMap.put(temp.getSymbol(), temp);
+				 chemMap.put(temp.getSymbol(), temp);
 				
 				 System.err.println(elRay[0]); // every number of sentence shows a diff part of the element
 				
@@ -78,17 +84,19 @@ public class AtomicReference {
 	
 	
 	
-	//public Element search (String key) {
-		//return chemMap.get(key);
+	public Element search (String key) {
+		return chemMap.get(key);
 		
+	}
 	
 	
-	//public void display() {
-		//Set<String> keyList = chemMap.keySet();
+	public void display() {
+		Set<String> keyList = chemMap.keySet();
 		
-		//for (String symbol : keyList) {
-			//Element ele = chemMap.get(symbol);
-			//System.err.println(ele); }
+		for (String symbol : keyList) {
+			Element ele = chemMap.get(symbol);
+			System.err.println(ele); }
+	}
 			
 	
 	
@@ -102,10 +110,19 @@ public class AtomicReference {
 			Scanner scn = new Scanner (System.in);
 			String sym = scn.nextLine();
 			
-			System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+			if(sym.equalsIgnoreCase("STOP")) {
+				System.err.println("Thanks for using Atomic Search Services. Please do come again!");
+				break; 
+				}
+			Element zzz = n1.search(sym);
+			
+			if(zzz==null) {
+				System.err.println("Sorry! You typed in '" + sym + "'. There is no element corresponding to this element.");
+			}
+			
+			System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" + sym );
 			System.out.println(n1.getChemMap().get(sym));
 			System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-					
 					
 		}
 		
